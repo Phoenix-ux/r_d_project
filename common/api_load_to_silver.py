@@ -3,6 +3,7 @@ import logging
 
 from datetime import datetime, date
 from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, DateType, IntegerType
 import pyspark.sql.functions as F
 
 def load_stock_to_silver(**kwargs):    
@@ -21,9 +22,11 @@ def load_stock_to_silver(**kwargs):
     
     logging.info(f"Loading 'out_of_stock' data for {ds} to Silver")
     
+    schema = StructType().add('date', DateType(), False).add('product_id', IntegerType(), False)
+    
     product_stock_df = spark.read\
         .option('header', True)\
-        .option('inferSchema', True)\
+        .schema(schema)\
         .json(os.path.join(bronze_path, 'product_stock.json'))
     
     product_stock_df = product_stock_df.dropDuplicates()

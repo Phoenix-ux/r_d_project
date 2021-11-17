@@ -2,17 +2,14 @@ stock_app:
     url: "https://robot-dreams-de-api.herokuapp.com"
     auth_endpoint: "/auth"
     data_endpoint: "/out_of_stock"
-    directory: '/home/user/stock_api/'
 
 currency_app:
     url: "http://api.exchangeratesapi.io/v1/latest"
-    access_key: "eca151fb6fb85f62966f98e8f8b5200b"
     symbols:
         - 'GBP'
         - 'ABC'
         - 'UAH'
         - 'USD'
-    directory: 'C:\Users\odejkun\currency\'
 
 app2:
     test: 1
